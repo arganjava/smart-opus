@@ -1,9 +1,8 @@
 'use strict';
 var module = angular.module('music', []);
-module.controller("MusicController", function ($scope, $http, MusicService) {
+module.controller("MusicController", function ($scope, $http, MusicService, $location) {
 
     $scope.listVoices = [];
-    $scope.isPlay = 'N';
 
     $scope.loadInit = function () {
         $scope.listVoices = MusicService.loadList();
@@ -11,7 +10,8 @@ module.controller("MusicController", function ($scope, $http, MusicService) {
     }
 
     $scope.play = function (id) {
-        MusicService.play(id);
+        $scope.audioPlay = '';
+        $scope.audioPlay = $location.protocol() + '://' + $location.host() + ':' + $location.port() + "/audio/play?fileName=" + id;
     }
     $scope.loadInit();
 
@@ -20,16 +20,8 @@ module.controller("MusicController", function ($scope, $http, MusicService) {
 module.factory('MusicService', ['$http', function ($http) {
     return {
         loadList: function () {
-            return [{id: "1", name: "dddd"}, {id: "2", name: "dddd"}];
-        },
-        play: function (id) {
-            $http({
-                method: 'GET',
-                url: '',
-                params: id
-            }).then(function (res) {
-                //$scope.taskData = res.data;
-            });
+            return [{id: "convertResult1", name: "convertResult 1"},
+                {id: "convertResult2", name: "convertResult 2"}];
         }
     }
 }]);

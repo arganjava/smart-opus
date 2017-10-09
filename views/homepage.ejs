@@ -270,7 +270,6 @@
         display: none;
     }
 
-
     .audio {
         float: right;
         width: 90%;
@@ -301,17 +300,24 @@
     <div class="main container clearfix">
 
         <div class="links">
-            <h3>Music List</h3>
-            <ul ng-repeat="voice in listVoices">
-                <a ng-click="play(voice.id)" style="cursor: pointer;text-decoration: none">
-                    <li>{{voice.name}}</li>
-                </a>
-            </ul>
+            <h3>Play List</h3>
+            <table style="text-align: center">
+                <tr ng-repeat="voice in listVoices">
+                    <th><li>{{voice.name}}</li></th>
+                    <th><a ng-click="play(voice.id)" style="cursor: pointer;text-decoration: none">
+                            <li>Play</li>
+                        </a></th></th>
+                </tr>
+            </table>
         </div>
 
-        <div class="audio" ng-if="isPlay == 'Y'">
-
+        <div class="audio">
+            <audio src="{{audioPlay}}" controls " >
+                Your browser does not support the audio element.
+            </audio>
         </div>
 
     </div>
 </div>
+<script src="/js/app/music.js"></script>
+

@@ -22,20 +22,29 @@ module.exports = {
     play: function (req, res) {
         var fileName = req.param('fileName');
         var stream = fs.createReadStream('./data/' + fileName + '.opus');
-        stream
-            .on('data', function (chunk) {
-                console.log(chunk);
-            })
-            .on('open', function (chunk) {
-                console.log('OPEN');
-                stream.pipe(res);
-            })
-            .on('end', function () {
-                console.log('All the data in the file has been read');
-            })
-            .on('close', function (err) {
-                console.log('Stream has been destroyed and file has been closed');
+        try {
+            stream
+                .on('data', function (chunk) {
+                    console.log(chunk);
+                })
+                .on('open', function (chunk) {
+                    console.log('OPEN');
+                    // res.setHeader('content-type', 'audio/ogg')
+                    stream.pipe(res);
+                })
+                .on('end', function () {
+                    console.log('All the data in the file has been read');
+                })
+                .on('close', function (err) {
+                    console.log('Stream has been destroyed and file has been closed');
+                });
+            process.on('uncaughtException', function (err) {
+                console.info(err)
             });
+        } catch (error) {
+            console.log(error)
+        }
+
 
     }
 };
