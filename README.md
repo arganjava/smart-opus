@@ -26,3 +26,12 @@ A step by step series of examples that tell you have to get a development env ru
 3. FULLSTACK (integrate backend and frontend) development completed
 
 ```
+
+### Running Application
+
+```
+move to project directory thes type sails lift example :
+user@ubuntu:~/PROJECT/SAILS/smart-opus$ sails lift
+open browser localhost:1337
+
+```
